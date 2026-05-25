@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bggqdy4f5ucui"]
+
+[node name="Shop" type="Node2D" unique_id=1187997817]
+
+[node name="buy_shell_button" type="Button" parent="." unique_id=1155118372]
+offset_left = 292.0
+offset_top = 38.0
+offset_right = 717.0
+offset_bottom = 103.0
+text = "Buy Shell."
+
+[node name="buy_upgrade_button" type="Button" parent="." unique_id=1821522315]
+offset_left = 286.0
+offset_top = 221.0
+offset_right = 711.0
+offset_bottom = 286.0
+text = "Buy Upgrade."
+
+[node name="buy_item_button" type="Button" parent="." unique_id=772221536]
+offset_left = 280.0
+offset_top = 404.0
+offset_right = 705.0
+offset_bottom = 469.0
+text = "Buy Item."
