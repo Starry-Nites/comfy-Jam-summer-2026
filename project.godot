@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="comfy-jam-summer-2026"
-run/main_scene="uid://yobt6ghdkemp"
+run/main_scene="uid://bu131c5yebmaj"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
