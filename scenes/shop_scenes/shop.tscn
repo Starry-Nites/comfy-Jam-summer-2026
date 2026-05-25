@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cku15l8lwyqhp"]
+
+[ext_resource type="Script" path="res://scenes/shop/shop_buttons.gd" id="1_stedb"]
+
+[node name="Shop" type="Node2D" unique_id=1187997817]
+
+[node name="Control" type="Control" parent="." unique_id=1638246964]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 311.70123
+offset_top = 334.90506
+offset_right = 351.70123
+offset_bottom = 374.90506
+script = ExtResource("1_stedb")
