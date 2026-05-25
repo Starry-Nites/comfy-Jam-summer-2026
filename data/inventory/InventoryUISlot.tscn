@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cp5pgqhma5c72"]
+
+[ext_resource type="Script" uid="uid://xhde4dmiqs4" path="res://data/inventory/inventory_ui_slot.gd" id="1_8rogl"]
+[ext_resource type="Texture2D" uid="uid://qaaj21dmjg5k" path="res://assets/01_TravelBookLite/Sprites/UI_TravelBook_Slot01a.png" id="2_vtf3o"]
+
+[node name="InventoryUISlot" type="Panel" unique_id=275375511]
+self_modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
+offset_right = 32.0
+offset_bottom = 32.0
+script = ExtResource("1_8rogl")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1161004263]
+position = Vector2(16, 16)
+texture = ExtResource("2_vtf3o")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1164036331]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="Panel" type="Panel" parent="CenterContainer" unique_id=1526490863]
+layout_mode = 2
+
+[node name="ItemDisplay" type="Sprite2D" parent="CenterContainer/Panel" unique_id=1976423927]
