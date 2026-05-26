@@ -1,15 +1,14 @@
 [gd_scene format=3 uid="uid://bu131c5yebmaj"]
 
-[ext_resource type="Script" uid="uid://dqpkcbgvv6h5a" path="res://scripts/quick-time-events/pebble_test.gd" id="1_8vuy7"]
+[ext_resource type="Script" uid="uid://bhchq7r4q2u60" path="res://scripts/main-menu/main_menu_buttons.gd" id="1_8vuy7"]
 
-[node name="Node2D" type="Node2D" unique_id=1152030222]
+[node name="Shop" type="Node2D" unique_id=1187997817]
 script = ExtResource("1_8vuy7")
 
-[node name="Control" type="Control" parent="." unique_id=1957963781]
+[node name="Control" type="Control" parent="." unique_id=1638246964]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 290.0
-offset_top = 94.0
-offset_right = 330.0
-offset_bottom = 134.0
-script = ExtResource("1_8vuy7")
+offset_left = 311.70123
+offset_top = 334.90506
+offset_right = 351.70123
+offset_bottom = 374.90506

@@ -11,21 +11,21 @@ func _ready() -> void:
 	var spwnpb = Button.new()
 	spwnpb.position = Vector2(20,20)
 	spwnpb.text = "spawn pebbl"
-	spwnpb.pressed.connect(_spawn_pebble)
 	add_child(spwnpb)
 	
-	
+	spwnpb.pressed.connect(_spawn_pebble)
 	
 	
 	
 func _spawn_pebble():
 	print("should spawn pebble")
+	var node = get_node("Control")
 	var QTE = QuickTimeEvent.new()
-	var x = QTE.create(5, 10, 10, 10, 50)
-	add_child(x)
+	var x = QTE.create(5, 10, 10, 10, 50, node)
+	#add_child(x)
 	
 func _button_pressed():
-	get_tree().change_scene_to_file("res://scenes/shop/shop.tscn")
+	get_tree().change_scene_to_file("res://scenes/shop_scenes/shop.tscn")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

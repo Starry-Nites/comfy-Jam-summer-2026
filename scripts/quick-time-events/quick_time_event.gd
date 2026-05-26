@@ -17,7 +17,7 @@ func _ready() -> void:
 
 # NOTE Eventually, this will contain fields for sprites and such (pebble sprite, bar sprite, shells, etc.)
 ## takes speed (fl), Peb_size(fl), green_size(fl), pbl(Vec2), and pbr(Vec2)
-func create(s: float, ps: float, gs: float, pbl: float, pbr: float) -> QuickTimeEvent:
+func create(s: float, ps: float, gs: float, pbl: float, pbr: float, node: Node) -> QuickTimeEvent:
 	print("Is it spawned yet?")
 	var QTE = QuickTimeEvent.new()
 	
@@ -32,7 +32,7 @@ func create(s: float, ps: float, gs: float, pbl: float, pbr: float) -> QuickTime
 	pebble.color = Color(1, 0, 0) # Red color
 	pebble.size = Vector2(ps, ps) # Size in pixels
 	pebble.position = Vector2(pbl, 100) # Position on screen
-	add_child(pebble)
+	node.add_child(pebble)
 	
 	return QTE
 	
