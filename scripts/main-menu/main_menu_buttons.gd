@@ -9,8 +9,8 @@ func _ready() -> void:
 	add_child(button)
 	
 	var spwnpb = Button.new()
-	spwnpb.position = Vector2(20,20)
-	spwnpb.text = "spawn pebbl"
+	spwnpb.position = Vector2(20,40)
+	spwnpb.text = "spawn pebble"
 	add_child(spwnpb)
 	
 	spwnpb.pressed.connect(_spawn_pebble)
