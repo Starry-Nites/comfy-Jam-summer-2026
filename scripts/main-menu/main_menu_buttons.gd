@@ -1,6 +1,8 @@
 extends Node
 
 const QuickTimeEvent = preload("res://scripts/quick-time-events/quick_time_event.gd")
+var QTE: quick_time_event
+var x: ColorRect
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var button = Button.new()
@@ -13,15 +15,18 @@ func _ready() -> void:
 	spwnpb.text = "spawn pebble"
 	add_child(spwnpb)
 	
+	QTE = quick_time_event.new()
+	
 	spwnpb.pressed.connect(_spawn_pebble)
-	
-	
 	
 func _spawn_pebble():
 	print("should spawn pebble")
 	var node = get_node("Control")
-	var QTE = QuickTimeEvent.new()
-	var x = QTE.create(5, 10, 10, 10, 50, node)
+	
+	x = QTE.create(100, 10, 10, 10, 200, node)
+	#QTE.set_pebble(x)
+	
+	
 	#add_child(x)
 	
 func _button_pressed():
@@ -30,4 +35,5 @@ func _button_pressed():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if (x != null):
+		QTE.move_pebble(x, delta)
