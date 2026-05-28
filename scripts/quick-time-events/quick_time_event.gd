@@ -1,8 +1,8 @@
 class_name quick_time_event extends Node
+#region Pebble attributes
 
-var speed: float
+var peb_speed: float
 var pebble_size: float
-var green_size: float
 
 var pebble: ColorRect
 
@@ -15,43 +15,58 @@ var dir = "right" # Dictates which direction the pebble is moving. The pebble wi
 
 var timer_num: float # Determines how long we will run the program before switching directions assuming base case.
 var direction_num: int # Acts as a coinflip to decide if we are moving left or right.
+#endregion
 
+#region Cursor attributes
+var cursor: ColorRect
+var cursor_speed: float
+#endregion
 # Called when the node enters the scene tree for the first time.
 
 # INFO 
  ## TO CREATE A QUICK TIME EVENT:
  ## Float: SPEED; Used to determine how quickly the pebble moves across the screen, in pixels (per frame).
- ## Float: SIZE; Used to create the pebble's horizontal size, in pixels.
- ## Float: GREEN_SIZE; Determines how large the "green area" is inside the QTE, in pixels.
+ ## Float: SIZE; Used to create the pebble's horizontal size, in pixels..
  ## Float: PEBBLE_BOUND_LEFT; Determines where on the left-hand side of the screen the pebble will "bounce" 
  	## back on. Creates an invisible wall at the specified x-value that sends the pebble the other direction, 
  	## when the pebble strikes it.
  ## Float: PEBBLE_BOUND_RIGHT; Same as Pebble_bound_left, but instead determines the right-hand side bound.
  ## Node: NODE; Determines which node the QTE and pebble should be children of.
-func _init(s: float, ps: float, gs: float, pbl: float, pbr: float, i: float, node: Node) -> void:
-	
+func _init(peb_params: Array, cursor_params) -> void: #BUG CHANGE TO DICTIONARY FOR CLARITY.
+
+#region Creating the pebble and getting it ready for movement
 	# Just creating a new rectangle and instantiating all of my variables
 	pebble = ColorRect.new()
-	speed = s
-	pebble_size = ps
-	green_size = gs
+	peb_speed = peb_params[0]
 	
-	pebble_bound_left = pbl
-	pebble_bound_right = pbr
+	pebble_bound_left = peb_params[2]
+	pebble_bound_right = peb_params[3]
 	
-	interval = i
+	interval = peb_params[4]
 	
 	pebble.color = Color(1, 0, 0)
-	pebble.size = Vector2(40, ps)
-	pebble.position = Vector2((pbl+pbr)/2, 100)
+	pebble.size = Vector2(40, peb_params[1])
+	pebble.position = Vector2((peb_params[2]+peb_params[3])/2, 100)
 	
-	node.add_child(pebble)
-	node.add_child(self)
+	peb_params[5].add_child(pebble)
+	peb_params[5].add_child(self)
 	
 	timer_num = randf_range(1, interval) # Used later for pebble movement. See pebble_move_random.
 	direction_num = 1
+#endregion
 	
+#region Creating the cursor and getting it ready for movement
+	cursor = ColorRect.new()
 	
+	cursor_speed = cursor_params[0]
+	cursor.size = Vector2(40, peb_params[1])
+	cursor.position = Vector2((peb_params[2]+peb_params[3])/2, 100)
+	
+	cursor.color = Color(1, 1, 1)
+	
+	peb_params[5].add_child(cursor)
+	
+#endregion
 	# Moves the pebble. When it hits the X-Value from PBL, it will turn around and begin to move right, 
 	#	 and vice versa.
 	
@@ -73,11 +88,11 @@ func move_pebble_linear(delta: float) -> void:
 	# 	the pebble's X-Coordinate. 
 #region New Code Region
 	if dir == "right":
-		pebble.position.x += speed * delta # Delta here used in order to scale movement to the frame rate.
-		print(speed)
+		pebble.position.x += peb_speed * delta # Delta here used in order to scale movement to the frame rate.
+		print(peb_speed)
 	
 	elif dir == "left":
-		pebble.position.x -= speed * delta
+		pebble.position.x -= peb_speed * delta
 		print("I moved left")
 #endregion
 
@@ -87,7 +102,7 @@ func move_pebble_random(delta: float) -> void:
 	
 	# Velocity includes the speed at which the pebble travels, direction it is traveling, and 
 	# 	the delta to scale for the framerate. Instead of applying these values manually, we add this vector instead
-	var velocity = (speed * direction_num * delta)
+	var velocity = (peb_speed * direction_num * delta)
 	
 	# If the anticipated movement would put us at the bounds, turn the other direction instead.
 	if (pebble.position.x + velocity >= pebble_bound_right || pebble.position.x + velocity <= pebble_bound_left):
@@ -108,6 +123,30 @@ func move_pebble_random(delta: float) -> void:
 	
 	# Once we have run out of time, change the pebble's direction as well.
 	direction_num *= -1
+	
+
+func pebble_cursor_collision() -> bool:
+	return true
+	
+func move_cursor_regular(delta: float) -> void:
+	var velocity = (cursor_speed * delta)
+	if Input.is_action_pressed("left"):
+		cursor.position.x += velocity * -1
+	elif Input.is_action_pressed("right"):
+		cursor.position.x += velocity
+	
+func move_cursor_icy (delta: float) -> void:
+	var velocity = (cursor_speed * delta)
+	var ideal_location = cursor.position
+	if Input.is_action_pressed("left"):
+		ideal_location.x += velocity * -1
+		cursor.position = cursor.position.lerp(ideal_location, delta * 4.0)
+	elif Input.is_action_pressed("right"):
+		ideal_location.x += velocity
+		cursor.position = cursor.position.lerp(ideal_location, delta * 4.0)
+		
+		
+		
 
 	
 	
