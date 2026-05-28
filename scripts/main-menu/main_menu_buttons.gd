@@ -12,7 +12,7 @@ func _ready() -> void:
 	add_child(button)
 	
 	node = get_node("Control")
-	QTE = quick_time_event.new(100, 10, 10, 10, 200, node)
+	QTE = quick_time_event.new(200, 10, 10, -20, 400, 5, node)
 	
 	
 
@@ -23,4 +23,4 @@ func _button_pressed():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if (QTE.pebble != null):
-		QTE.move_pebble(QTE.pebble, delta)
+		QTE.move_pebble_random(delta)
